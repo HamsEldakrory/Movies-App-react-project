@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../configs';
+import store from '../store';
 
 const api = axios.create({
   baseURL: config.TMDB_BASE_URL,
@@ -10,8 +11,13 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (conf) => {
+    const state = store.getState();
+    const selectedLanguage = state.language.language;
+
     conf.params = conf.params || {};
     conf.params['api_key'] = config.TMDB_API_KEY;
+    conf.params['language'] = selectedLanguage;
+
     return conf;
   },
   (error) => Promise.reject(error)
