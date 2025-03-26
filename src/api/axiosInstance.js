@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../config';
+import config from '../configs';
 
 const api = axios.create({
   baseURL: config.TMDB_BASE_URL,
@@ -9,10 +9,10 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(
-  (config) => {
-    config.params = config.params || {};
-    config.params['api_key'] = config.TMDB_API_KEY;
-    return config;
+  (conf) => {
+    conf.params = conf.params || {};
+    conf.params['api_key'] = config.TMDB_API_KEY;
+    return conf;
   },
   (error) => Promise.reject(error)
 );
