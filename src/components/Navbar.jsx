@@ -33,7 +33,7 @@ const IMDbNavbar = () => {
               Movies
             </Nav.Link>
 
-            <Nav.Link as={NavLink} to="/" className="me-2">
+            <Nav.Link as={NavLink} to="/tv-shows" className="me-2">
               Tv Shows
             </Nav.Link>
           </Nav>
@@ -42,7 +42,7 @@ const IMDbNavbar = () => {
           <Nav className="ms-auto">
             <Nav.Link
               as={Link}
-              to="/watchlist"
+              to="/watch-list"
               className="me-3 p-0 d-flex align-items-center"
               style={{ color: 'white' }}
             >

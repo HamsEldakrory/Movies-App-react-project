@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToWatchlist, removeFromWatchlist } from '../storeManagement/watchlistSlice';
+import { addToWatchlist, removeFromWatchlist } from '../store/slices/watchlistSlice';
 import { Link } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
