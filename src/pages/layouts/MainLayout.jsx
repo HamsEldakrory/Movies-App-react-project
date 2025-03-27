@@ -1,12 +1,16 @@
 import { Outlet } from 'react-router-dom';
-
-const MainLayout = () => {
+import IMDbNavbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
+function MainLayout() {
   return (
-    <div>
-      <h1>MainLayout</h1>
-      <Outlet />
+    <div className="d-flex flex-column min-vh-100">
+      <IMDbNavbar />
+      <main className="flex-grow-1">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   );
-};
+}
 
 export default MainLayout;

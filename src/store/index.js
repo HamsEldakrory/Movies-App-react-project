@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import languageReducer from "./languageSlice";
-import watchlistReducer from "./watchlistSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import languageReducer from './slices/languageSlice';
+import watchlistReducer from './slices/watchlistSlice';
 
 const store = configureStore({
   reducer: {
