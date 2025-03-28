@@ -1,14 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
-import config from '../configs/index';
+import config from '../configs';
 import { FaStar } from 'react-icons/fa6';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWatchlist, removeFromWatchlist } from '../store/slices/watchlistSlice';
 import { Link } from 'react-router-dom';
 
-export const MainPageCard = (props) => {
+const placeholderImage = 'https://placehold.co/600x400?text=Not Found';
+
+const MainPageCard = (props) => {
   const { showItem } = props;
   const dispatch = useDispatch();
   const watchlist = useSelector((state) => state.watchlist.watchlist);
@@ -27,12 +29,16 @@ export const MainPageCard = (props) => {
 
   return (
     <>
-      <Card style={{ width: '18rem', border: 'none', position: 'relative' }}>
-        <Link to={`/movie/${showItem.id}`}>
+      <Card style={{ width: '15rem', border: 'none', position: 'relative' }}>
+        <Link to={`/movies/${showItem.id}`}>
           <Card.Img
             variant="top"
             style={{ width: '100%', borderRadius: '10px' }}
-            src={config.TMDB_IMAGE_BASE_URL + showItem.poster_path}
+            src={
+              showItem?.poster_path
+                ? config.TMDB_IMAGE_BASE_URL + showItem.poster_path
+                : placeholderImage
+            }
           />
         </Link>
 
@@ -86,8 +92,10 @@ export const MainPageCard = (props) => {
               </span>
             </div>
           </Badge>
-          <Link className='text-decoration-none text-black' to={`/movie/${showItem.id}`}>
-          <Card.Title style={{ fontSize: '18px', textDecoration: 'none'}}>{showItem.title}</Card.Title>
+          <Link className="text-decoration-none text-black" to={`/movie/${showItem.id}`}>
+            <Card.Title style={{ fontSize: '18px', textDecoration: 'none' }}>
+              {showItem.title}
+            </Card.Title>
           </Link>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Card.Text className="text-muted">
@@ -116,3 +124,4 @@ export const MainPageCard = (props) => {
     </>
   );
 };
+export default MainPageCard;
