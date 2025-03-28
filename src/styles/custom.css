@@ -1,12 +1,85 @@
 :root {
-    --primary-bg: #000000; /* Black background */
-    --primary-text: #ffffff; /* White text */
-    --accent-color: #ffc107; /* Yellow for ratings and highlights */
-    --secondary-text: #bdbdbd; /* Light gray for subtitles */
-    --button-bg: #303030; /* Dark gray for buttons */
-    --button-hover: #424242; /* Slightly lighter gray on hover */
-    --card-bg: #1c1c1c; /* Dark card background */
-    --star-color: #ffcc00; /* Gold stars for ratings */
-  }
-  
-  
+  --primary-bg: #000000; /* Black background */
+  --primary-text: #ffffff; /* White text */
+  --accent-color: #ffc107; /* Yellow for ratings and highlights */
+  --secondary-text: #bdbdbd; /* Light gray for subtitles */
+  --button-bg: #303030; /* Dark gray for buttons */
+  --button-hover: #424242; /* Slightly lighter gray on hover */
+  --card-bg: #1c1c1c; /* Dark card background */
+  --star-color: #ffcc00; /* Gold stars for ratings */
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: var(--primary-bg);
+}
+.text-white {
+  color: var(--primary-text) !important;
+}
+
+.text-secondary {
+  color: var(--secondary-text) !important;
+}
+
+.text-accent {
+  color: var(--accent-color) !important;
+}
+
+.text-star {
+  color: var(--star-color) !important;
+}
+.genre-badge {
+  background-color: var(--accent-color) !important;
+  color: var(--primary-bg) !important;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.production-container {
+  background-color: var(--primary-bg);
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.production-logo {
+  height: 50px;
+  object-fit: contain;
+  background-color: var(--primary-text);
+  border-radius: 5px;
+}
+
+.production-text {
+  color: var(--primary-text);
+  font-weight: bold;
+}
+.custom-button {
+  background-color: var(--accent-color) !important;
+  color: var(--primary-bg) !important;
+  border: none;
+  font-weight: bold;
+}
+.custom-button:hover {
+  background-color: var(--button-hover) !important;
+}
+.custom-card {
+  background-color: var(--card-bg) !important;
+  color: var(--primary-text) !important;
+}
+.rating-badge {
+  background-color: var(--accent-color) !important;
+  color: var(--primary-bg) !important;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
