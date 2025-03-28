@@ -5,6 +5,8 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import Carousel from 'react-multi-carousel';
 import useMovies from '../hooks/useMoviesDetailes';
 import config from '../configs';
+import WatchListButton from '../components/WatchListButton';
+import MainPageCard from '../components/MainPageCard';
 
 const placeholderImage = 'https://placehold.co/600x400?text=Not Found';
 
@@ -51,9 +53,12 @@ const MovieDetailsPage = () => {
           />
         </Col>
         <Col md={8}>
-          <h1 className="fw-bold text-accent" style={{ fontSize: '3rem' }}>
-            {movie?.title || 'Unknown Title'}
-          </h1>
+          <div className="d-flex justify-content-between align-items-start">
+            <h1 className="fw-bold text-accent" style={{ fontSize: '3rem' }}>
+              {movie?.title || 'Unknown Title'}
+            </h1>
+            <WatchListButton movie={movie} />
+          </div>
           <p className="text-secondary">
             {movie?.release_date ? new Date(movie.release_date).toDateString() : 'Unknown Date'}
           </p>
@@ -86,7 +91,24 @@ const MovieDetailsPage = () => {
             <strong className="text-white">Languages:</strong>
             {movie?.spoken_languages?.map((lang) => lang.english_name).join(', ') || 'N/A'}
           </div>
-
+          {movie.production_companies.length > 0 && (
+            <div className="production-container">
+              {movie.production_companies.map((company) =>
+                company.logo_path ? (
+                  <img
+                    key={company.id}
+                    src={config.TMDB_IMAGE_BASE_URL + company.logo_path}
+                    alt={company.name}
+                    className="production-logo"
+                  />
+                ) : (
+                  <span key={company.id} className="production-text">
+                    {company.name}
+                  </span>
+                )
+              )}
+            </div>
+          )}
           {movie?.homepage && (
             <Button href={movie.homepage} target="_blank" className="custom-button">
               Official Website
@@ -119,32 +141,7 @@ const MovieDetailsPage = () => {
           className="mt-3"
         >
           {recommendations.map((recMovie) => (
-            <div key={recMovie.id} className="p-2">
-              <Card className="custom-card">
-                <Card.Img
-                  src={
-                    recMovie?.poster_path
-                      ? config.TMDB_IMAGE_BASE_URL + recMovie.poster_path
-                      : placeholderImage
-                  }
-                  alt={recMovie?.title || 'Movie Poster'}
-                  className="rounded-top"
-                />
-                <Card.Body className="text-center">
-                  <Badge className="rating-badge">
-                    {Math.round((recMovie?.vote_average || 0) * 10)}%
-                  </Badge>
-                  <Card.Title className="fs-6 mt-2 text-white">
-                    {recMovie?.title || 'Unknown Title'}
-                  </Card.Title>
-                  <Card.Text className="text-secondary">
-                    {recMovie?.release_date
-                      ? new Date(recMovie.release_date).toDateString()
-                      : 'Unknown Date'}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </div>
+            <MainPageCard key={recMovie.id} showItem={recMovie} />
           ))}
         </Carousel>
       )}

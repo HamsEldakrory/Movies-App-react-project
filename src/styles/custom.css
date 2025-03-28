@@ -65,6 +65,7 @@ body{
   color: var(--primary-bg) !important;
   border: none;
   font-weight: bold;
+  margin-top: 12px;
 }
 .custom-button:hover {
   background-color: var(--button-hover) !important;

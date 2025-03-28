@@ -1,40 +1,36 @@
 import React from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWatchlist, removeFromWatchlist } from '../store/slices/watchlistSlice';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
-function WatchListButton(props) {
-  const { movie } = props;
+function WatchListButton({ movie }) {
   const dispatch = useDispatch();
   const watchlist = useSelector((state) => state.watchlist.watchlist);
 
-  const isInWatchlist = (movieId) => {
-    return watchlist.some((item) => item.id === movieId);
-  };
+  const isInWatchlist = watchlist.some((item) => item.id === movie.id);
 
-  const handleToggleWatchlist = (movie) => {
-    if (isInWatchlist(movie.id)) {
+  const handleToggleWatchlist = () => {
+    if (isInWatchlist) {
       dispatch(removeFromWatchlist(movie.id));
     } else {
       dispatch(addToWatchlist(movie));
     }
   };
+
   return (
     <button
-      onClick={() => handleToggleWatchlist(movie)}
+      onClick={handleToggleWatchlist}
       style={{
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        padding: '5px',
       }}
-      aria-label={isInWatchlist(movie.id) ? 'Remove from watchlist' : 'Add to watchlist'}
+      aria-label={isInWatchlist ? 'Remove from watchlist' : 'Add to watchlist'}
     >
-      {isInWatchlist(movie.id) ? (
-        <FaHeart style={{ color: 'red', fontSize: '20px' }} />
+      {isInWatchlist ? (
+        <FaHeart color="#ffcc00" size={24} />
       ) : (
-        <FaRegHeart style={{ color: 'red', fontSize: '20px' }} />
+        <FaRegHeart color="#ffcc00" size={24} />
       )}
     </button>
   );

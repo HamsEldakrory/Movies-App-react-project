@@ -1,55 +1,61 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import { Star } from 'lucide-react';
-import { removeFromWatchlist } from '../store/slices/watchlistSlice';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Heart } from 'lucide-react';
-import '../styles/custom.css';
-function WatchListCard(props) {
-  const { movie } = props;
+import { removeFromWatchlist } from '../store/slices/watchlistSlice';
+import { Heart, Star } from 'lucide-react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import config from '../configs';
+
+function WatchListCard({ movie }) {
   const dispatch = useDispatch();
+
   const handleRemoveFromWatchlist = () => {
     dispatch(removeFromWatchlist(movie.id));
   };
+  const placeholderImage = 'https://placehold.co/600x400?text=Not Found';
   return (
-    <Card key={movie.id} className="m-3 rounded-3 shadow d " style={{ maxWidth: '540px' }}>
-      <div className="d-flex flex-row align-items-center gap-4 ">
+    <Card key={movie.id} className="m-3 rounded-3 shadow" style={{ maxWidth: '540px' }}>
+      <div className="d-flex flex-row align-items-center gap-4">
         <div>
           <Card.Img
-            src="../../public/download (1) 3.png"
-            style={{ width: '450px', height: '250px' }}
+            src={
+              movie.poster_path ? config.TMDB_IMAGE_BASE_URL + movie.poster_path : placeholderImage
+            }
+            style={{ width: '200px', height: '250px' }}
             className="img-fluid m-3"
           />
         </div>
-        <div className="">
+        <div>
           <Card.Body>
-            <Card.Title className="fw-bolder  " style={{ fontSize: '35px' }}>
+            <Card.Title className="fw-bolder" style={{ fontSize: '24px' }}>
               {movie.title}
               <Button
                 onClick={handleRemoveFromWatchlist}
                 className="float-end border-0"
-                style={{
-                  backgroundColor: 'white',
-                  width: '40px',
-                  height: '40px',
-                }}
+                style={{ backgroundColor: 'white' }}
               >
                 <Heart fill="#FFE353" size={35} />
               </Button>
             </Card.Title>
-            <Card.Text className="text-muted small ">Sep 25, 2017</Card.Text>
-            <Card.Text className="text-muted small ">
-              <div className="d-flex flex-row align-items-center gap-1 star ">
-                <Star className="text-dark " fill="dark" size={20} />
-                <Star className="text-dark " fill="dark" size={20} />
-                <Star className="text-dark " fill="dark" size={20} />
-                <Star className="text-dark " fill="dark" size={20} />
-                <Star className="text-dark" size={20} /> 9288
-              </div>{' '}
+            <Card.Text className="text-muted small">
+              {movie.release_date
+                ? new Date(movie.release_date).toDateString()
+                : 'Unknown Release Date'}
             </Card.Text>
-            <Card.Text className="">
-              Natasha Romanoff, also known as Black Widow, confronts the darker parts of her ledger
-              when a dangerous conspiracy with ties to her past arises. Pursued by....
+            <Card.Text className="text-muted small">
+              <div className="d-flex flex-row align-items-center gap-1">
+                {Array.from({ length: 5 }, (_, index) => (
+                  <Star
+                    key={index}
+                    fill={index < Math.round((movie.vote_average || 0) / 2) ? 'black' : 'none'}
+                    size={20}
+                  />
+                ))}
+                {movie.vote_count || 0}
+              </div>
+            </Card.Text>
+            <Card.Text>
+              {movie.overview ? `${movie.overview.slice(0, 100)}...` : 'No description available.'}
             </Card.Text>
           </Card.Body>
         </div>
