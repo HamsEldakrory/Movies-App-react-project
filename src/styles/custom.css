@@ -1,12 +1,14 @@
 :root {
-    --primary-bg: #000000; /* Black background */
-    --primary-text: #ffffff; /* White text */
-    --accent-color: #ffc107; /* Yellow for ratings and highlights */
-    --secondary-text: #bdbdbd; /* Light gray for subtitles */
-    --button-bg: #303030; /* Dark gray for buttons */
-    --button-hover: #424242; /* Slightly lighter gray on hover */
-    --card-bg: #1c1c1c; /* Dark card background */
-    --star-color: #ffcc00; /* Gold stars for ratings */
-  }
-  
-  
+  --primary-bg: #000000; /* Black background */
+  --primary-text: #ffffff; /* White text */
+  --accent-color: #ffc107; /* Yellow for ratings and highlights */
+  --secondary-text: #bdbdbd; /* Light gray for subtitles */
+  --button-bg: #303030; /* Dark gray for buttons */
+  --button-hover: #424242; /* Slightly lighter gray on hover */
+  --card-bg: #1c1c1c; /* Dark card background */
+  --star-color: #ffcc00; /* Gold stars for ratings */
+}
+
+.star:hover {
+  cursor: pointer;
+}
