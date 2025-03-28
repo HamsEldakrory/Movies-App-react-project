@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap';
 import { Search, Bookmark, User } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
+import LanguageDropdown from './LanguageDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const IMDbNavbar = () => {
@@ -49,14 +50,7 @@ const IMDbNavbar = () => {
               <Bookmark size={25} />
             </Nav.Link>
             <Nav.Link as={NavLink} className="me-3 p-0 d-flex align-items-center">
-              <select
-                className="me-2 bg-dark "
-                style={{ color: 'white', borderRadius: '4px', padding: '5px' }}
-              >
-                <option value="en">EN</option>
-                <option value="es">Ar</option>
-                <option value="fr">Fr</option>
-              </select>
+                <LanguageDropdown />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
