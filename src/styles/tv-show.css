@@ -1,0 +1,88 @@
+.tv-show-details {
+  background-color: #f8f9fa;
+  padding: 2rem 0;
+}
+
+.tv-show-poster {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tv-show-poster:hover {
+  transform: translateY(-5px);
+}
+
+.show-title {
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 0.5rem;
+}
+
+.show-meta {
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+.show-description {
+  line-height: 1.8;
+  color: #495057;
+}
+
+.genre-badge {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.season-card {
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.season-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.season-card-img {
+  height: 300px;
+  object-fit: cover;
+}
+
+.info-icon {
+  color: #6c757d;
+  margin-right: 0.5rem;
+}
+
+.network-logo {
+  max-height: 50px;
+  max-width: 150px;
+  object-fit: contain;
+  filter: grayscale(30%);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.network-logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.modal-content {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.heart-btn {
+  transition: all 0.3s ease;
+}
+
+.heart-btn:hover {
+  transform: scale(1.1);
+}

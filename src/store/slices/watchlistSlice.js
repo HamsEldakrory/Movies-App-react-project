@@ -27,5 +27,7 @@ const watchlistSlice = createSlice({
   },
 });
 
+export const selectWatchlistCount = (state) => state.watchlist.watchlist.length;
+
 export const { addToWatchlist, removeFromWatchlist, clearWatchlist } = watchlistSlice.actions;
 export default watchlistSlice.reducer;

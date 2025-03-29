@@ -1,56 +1,46 @@
 import React from 'react';
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap';
-import { Search, Bookmark, User } from 'lucide-react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Search, Bookmark } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectWatchlistCount } from '../store/slices/watchlistSlice';
 import LanguageDropdown from './LanguageDropdown';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/navbar.css';
 
 const IMDbNavbar = () => {
+  const watchlistCount = useSelector(selectWatchlistCount);
+
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="py-2">
-      <Container fluid>
-        {/* IMDb Logo */}
-        <Navbar.Brand as={Link} to="/" className="me-4">
-          <div
-            style={{
-              backgroundColor: '#F5C518',
-              color: 'black',
-              fontWeight: 'bold',
-              padding: '2px 5px',
-              borderRadius: '3px',
-            }}
-          >
-            IMDb
-          </div>
+    <Navbar expand="lg" className="cinema-navbar shadow" fixed="top">
+      <Container fluid className="navbar-container">
+        <Navbar.Brand as={Link} to="/" className="cinema-logo">
+          <span className="logo-text">CinemaScore</span>
         </Navbar.Brand>
 
-        {/* Mobile Toggle Button */}
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="cinema-navbar-nav" className="custom-toggle" />
 
-        {/* Collapsible Navigation */}
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/" className="me-2">
+        <Navbar.Collapse id="cinema-navbar-nav">
+          <Nav className="me-auto nav-links">
+            <Nav.Link as={NavLink} to="/" className="nav-item">
               Movies
             </Nav.Link>
-
-            <Nav.Link as={NavLink} to="/tv-shows" className="me-2">
-              Tv Shows
+            <Nav.Link as={NavLink} to="/tv-shows" className="nav-item">
+              TV Shows
             </Nav.Link>
           </Nav>
 
-          {/* Icons */}
-          <Nav className="ms-auto">
-            <Nav.Link
-              as={Link}
-              to="/watch-list"
-              className="me-3 p-0 d-flex align-items-center"
-              style={{ color: 'white' }}
-            >
-              <Bookmark size={25} />
+          <Nav className="ms-auto nav-actions d-flex align-items-center">
+            <Nav.Link as={Link} to="/search" className="nav-icon position-relative">
+              <Search size={30} />
             </Nav.Link>
-            <Nav.Link as={NavLink} className="me-3 p-0 d-flex align-items-center">
-                <LanguageDropdown />
+
+            <Nav.Link as={Link} to="/watch-list" className="nav-icon position-relative">
+              <Bookmark size={30} />
+              {watchlistCount > 0 && <span className="badge">{watchlistCount}</span>}
+            </Nav.Link>
+
+            <Nav.Link as={NavLink} className="nav-icon language-drop">
+              <LanguageDropdown />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
