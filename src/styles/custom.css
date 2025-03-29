@@ -14,8 +14,8 @@
   box-sizing: border-box;
 }
 body {
-  background-color: var(--primary-bg);
-  color: var(--primary-text);
+  background-color: var(--primary-bg) !important;
+  color: var(--primary-text) !important;
   font-family: 'Arial', sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -135,10 +135,8 @@ body {
   color: var(--primary-bg) !important;
 }
 
-
-
 /* Watchlist */
-.back-home-btn{
+.back-home-btn {
   background-color: var(--button-bg);
   color: var(--primary-text);
   padding: 10px 20px;
@@ -146,6 +144,10 @@ body {
   text-decoration: none;
 }
 
-.back-home-btn:hover{
+.back-home-btn:hover {
   background-color: var(--button-hover);
+}
+
+.fs-0 {
+  font-size: 3rem;
 }

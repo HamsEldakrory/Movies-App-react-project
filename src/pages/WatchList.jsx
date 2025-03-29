@@ -2,7 +2,6 @@ import React from 'react';
 import WatchListCard from '../components/WatchListCard';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import '../styles/custom.css'
 const WatchList = () => {
   const watchlist = useSelector((state) => state.watchlist.watchlist);
 

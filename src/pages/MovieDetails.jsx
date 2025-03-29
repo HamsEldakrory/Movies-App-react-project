@@ -12,9 +12,6 @@ const placeholderImage = 'https://placehold.co/600x400?text=Not Found';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  if (!movieId) {
-    return <p className="text-light text-center mt-5">Invalid movie ID</p>;
-  }
   const {
     movie = {},
     recommendations = [],
@@ -27,8 +24,10 @@ const MovieDetailsPage = () => {
     reviewsError = null,
     reviewMutation = { mutate: () => {}, isLoading: false },
   } = useMovies({ movieId }) || {};
-
   const [newReview, setNewReview] = useState('');
+  if (!movieId) {
+    return <p className="text-light text-center mt-5">Invalid movie ID</p>;
+  }
 
   const handleReviewSubmit = (e) => {
     e.preventDefault();

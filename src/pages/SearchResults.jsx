@@ -47,8 +47,6 @@ const SearchResults = () => {
     );
   }
 
-  console.log(data);
-
   return (
     <Container className="my-5">
       <Search />
