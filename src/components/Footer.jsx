@@ -1,54 +1,39 @@
 import React from 'react';
+import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FaTiktok, FaInstagram, FaTwitter, FaYoutube, FaFacebook } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-
+import '../styles/footer.css';
 const Footer = () => {
   const socialIcons = [
-    { icon: <FaTiktok />, link: 'https://www.tiktok.com/@imdb' },
-    { icon: <FaInstagram />, link: 'https://www.instagram.com/imdb' },
-    { icon: <FaTwitter />, link: 'https://twitter.com/imdb' },
-    { icon: <FaYoutube />, link: 'https://www.youtube.com/imdb' },
-    { icon: <FaFacebook />, link: 'https://www.facebook.com/imdb' },
+    { icon: <FaTiktok />, link: 'https://www.tiktok.com/' },
+    { icon: <FaInstagram />, link: 'https://www.instagram.com/' },
+    { icon: <FaTwitter />, link: 'https://twitter.com/' },
+    { icon: <FaYoutube />, link: 'https://www.youtube.com/' },
+    { icon: <FaFacebook />, link: 'https://www.facebook.com/' },
   ];
-
-  const footerLinks1 = [
-    'Help',
-    'Site Index',
-    'IMDbPro',
-    'Press Room',
-    'Advertising',
-    'Jobs',
-    'Conditions of Use',
-    'Privacy Policy',
-    'Your Ads Privacy Choices',
-  ];
-
-  const footerLinks2 = ['Box Office Mojo', 'License IMDb Data'];
 
   return (
-    <footer className="bg-dark text-light py-5">
-      <div className="container">
-        {/* Social Media Icons */}
-        <div className="d-flex justify-content-center mb-4">
-          <div className="border border-secondary rounded p-3">
-            <div className="d-flex align-items-center">
-              <span className="me-3">Follow IMDb on Social</span>
-              {socialIcons.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-light me-3"
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
-          </div>
+    <Navbar bg="dark" variant="dark" className="footer-navbar py-5 mt-4">
+      <Container fluid className="d-flex flex-column align-items-center">
+        <div className="d-flex justify-content-center mb-3">
+          {socialIcons.map((social, index) => (
+            <a
+              key={index}
+              href={social.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-icon mx-2"
+            >
+              {social.icon}
+            </a>
+          ))}
         </div>
-      </div>
-    </footer>
+
+        <div className="text-secondary mt-2">
+          &copy; {new Date().getFullYear()} CinemaScore. All rights reserved.
+        </div>
+      </Container>
+    </Navbar>
   );
 };
 
