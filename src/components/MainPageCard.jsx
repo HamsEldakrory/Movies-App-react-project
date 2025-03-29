@@ -1,14 +1,13 @@
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Badge from 'react-bootstrap/Badge';
 import config from '../configs';
-import { FaStar } from 'react-icons/fa6';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWatchlist, removeFromWatchlist } from '../store/slices/watchlistSlice';
 import { Link } from 'react-router-dom';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
-const placeholderImage = 'https://placehold.co/600x400?text=Not Found';
+const placeholderImage = 'https://placehold.co/307x400?text=Not Found';
 
 const MainPageCard = (props) => {
   const { showItem } = props;
@@ -27,101 +26,77 @@ const MainPageCard = (props) => {
     }
   };
 
+  let circularProgress = {
+    backgroundColor: '#081b23',
+    textColor: '#fff',
+    pathColor: 'red',
+    trailColor: 'transparent',
+  };
+  if (showItem.vote_average * 10 >= 50) {
+    circularProgress.pathColor = '#4a651e';
+  }
+  if (showItem.vote_average * 10 >= 70) {
+    circularProgress.pathColor = '#3d8544';
+  }
+
   return (
-    <>
-      <Card style={{ width: '15rem', border: 'none', position: 'relative' }}>
-        <Link to={`/movies/${showItem.id}`}>
+    <Card className="border-0" style={{ width: '25rem' }}>
+      <Link to={`/movies/${showItem.id}`}>
+        <div>
           <Card.Img
             variant="top"
-            style={{ width: '100%', borderRadius: '10px' }}
             src={
-              showItem?.poster_path
+              showItem.poster_path
                 ? config.TMDB_IMAGE_BASE_URL + showItem.poster_path
                 : placeholderImage
             }
+            style={{ height: '400px' }}
           />
-        </Link>
+        </div>
+      </Link>
 
-        <Card.Body className="mt-3" style={{ position: 'relative' }}>
-          <Badge
-            className="position-absolute"
-            bg="unknown"
+      <Card.Body className="mt-3" style={{ position: 'relative' }}>
+        <div
+          style={{ width: 60, height: 60, top: '-50px', left: '18px' }}
+          className="position-absolute"
+        >
+          <CircularProgressbar
+            value={showItem.vote_average * 10}
+            text={`${Math.floor(showItem.vote_average * 10)}%`}
+            background
+            backgroundPadding={6}
+            styles={buildStyles(circularProgress)}
+          />
+        </div>
+        <Link className="text-decoration-none text-black" to={`/movie/${showItem.id}`}>
+          <Card.Title style={{ fontSize: '18px', textDecoration: 'none' }}>
+            {showItem.title}
+          </Card.Title>
+        </Link>
+        <div className="d-flex align-items-center justify-content-between">
+          <Card.Text className="text-muted mb-0">
+            <span>{showItem.release_date}</span>
+          </Card.Text>
+          <button
+            onClick={() => handleToggleWatchlist(showItem)}
             style={{
-              backgroundColor: '#081d22',
-              top: '-50px',
-              left: '18px',
-              borderRadius: '50%',
-              width: '60px',
-              height: '60px',
-              color: '#fff',
-              fontSize: '14px',
-              fontWeight: 'bold',
-              textAlign: 'center',
-              border: '0.5px solid #fff',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '5px',
+              paddingBottom: '10px',
             }}
+            aria-label={isInWatchlist(showItem.id) ? 'Remove from watchlist' : 'Add to watchlist'}
           >
-            <div
-              style={{
-                border: '3px solid #1ca563',
-                borderColor:
-                  showItem.vote_average > 7
-                    ? '#1ca563'
-                    : showItem.vote_average > 4.9
-                      ? '#b4b82d'
-                      : '#db2c2c',
-                borderRadius: '50%',
-                width: '49px',
-                height: '49px',
-                backgroundColor: 'none',
-                color: '#fff',
-                fontSize: '12px',
-                fontWeight: 'bold',
-                textAlign: 'center',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '5px',
-              }}
-            >
-              <span>
-                {showItem.vote_average}&nbsp;
-                <FaStar style={{ paddingBottom: '3px' }} />
-              </span>
-            </div>
-          </Badge>
-          <Link className="text-decoration-none text-black" to={`/movie/${showItem.id}`}>
-            <Card.Title style={{ fontSize: '18px', textDecoration: 'none' }}>
-              {showItem.title}
-            </Card.Title>
-          </Link>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Card.Text className="text-muted">
-              <span>{showItem.release_date}</span>
-            </Card.Text>
-            <button
-              onClick={() => handleToggleWatchlist(showItem)}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '5px',
-                paddingBottom: '10px',
-              }}
-              aria-label={isInWatchlist(showItem.id) ? 'Remove from watchlist' : 'Add to watchlist'}
-            >
-              {isInWatchlist(showItem.id) ? (
-                <FaHeart style={{ color: '#F5C518', fontSize: '20px' }} />
-              ) : (
-                <FaRegHeart style={{ color: 'black', fontSize: '20px' }} />
-              )}
-            </button>
-          </div>
-        </Card.Body>
-      </Card>
-    </>
+            {isInWatchlist(showItem.id) ? (
+              <FaHeart style={{ color: '#F5C518', fontSize: '20px' }} />
+            ) : (
+              <FaRegHeart style={{ color: 'black', fontSize: '20px' }} />
+            )}
+          </button>
+        </div>
+      </Card.Body>
+    </Card>
   );
 };
 export default MainPageCard;
