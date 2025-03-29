@@ -53,7 +53,7 @@ const MovieDetailsPage = () => {
           />
         </Col>
         <Col md={8}>
-          <div className="d-flex justify-content-between align-items-start">
+          <div className="d-flex justify-content-between align-items-center">
             <h1 className="fw-bold text-accent" style={{ fontSize: '3rem' }}>
               {movie?.title || 'Unknown Title'}
             </h1>
@@ -127,10 +127,10 @@ const MovieDetailsPage = () => {
       ) : (
         <Carousel
           responsive={{
-            superLargeDesktop: { breakpoint: { max: 4000, min: 1200 }, items: 5 },
-            desktop: { breakpoint: { max: 1200, min: 992 }, items: 4 },
-            tablet: { breakpoint: { max: 992, min: 768 }, items: 3 },
-            mobile: { breakpoint: { max: 768, min: 0 }, items: 2 },
+            superLargeDesktop: { breakpoint: { max: 4000, min: 1200 }, items: 4},
+            desktop: { breakpoint: { max: 1200, min: 992 }, items: 3},
+            tablet: { breakpoint: { max: 992, min: 768 }, items: 2 },
+            mobile: { breakpoint: { max: 768, min: 0 }, items: 1 },
           }}
           infinite
           autoPlay

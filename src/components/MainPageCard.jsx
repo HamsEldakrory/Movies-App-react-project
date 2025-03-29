@@ -41,7 +41,7 @@ const MainPageCard = (props) => {
   }
 
   return (
-    <Card className="border-0 flex-fill" style={{ width: '18rem', height: '430px' }}>
+    <Card className="border-0 flex-fill" style={{ width: '18rem', height: '100%' }}>
       <Link to={showType == 'movie' ? `/movies/${showItem.id}` : `/tv-shows/${showItem.id}`}>
           <div>
             <Card.Img
