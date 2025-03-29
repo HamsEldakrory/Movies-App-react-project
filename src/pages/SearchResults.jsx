@@ -2,6 +2,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Search from '../components/Search';
 import useSearchResults from '../hooks/useSearch';
 import MainPageCard from '../components/MainPageCard';
+import CustomPagination from '../components/Pagination';
 
 const SearchResults = () => {
   const { data, isLoading, isError, error, query } = useSearchResults();
@@ -46,6 +47,8 @@ const SearchResults = () => {
     );
   }
 
+  console.log(data);
+
   return (
     <Container className="my-5">
       <Search />
@@ -66,6 +69,7 @@ const SearchResults = () => {
           </Col>
         ))}
       </Row>
+      <CustomPagination totalPages={data.totalPages} />
     </Container>
   );
 };
