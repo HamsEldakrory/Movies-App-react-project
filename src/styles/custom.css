@@ -125,3 +125,18 @@ body {
 .page-link {
   color: var(--primary-bg) !important;
 }
+
+
+
+/* Watchlist */
+.back-home-btn{
+  background-color: var(--button-bg);
+  color: var(--primary-text);
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.back-home-btn:hover{
+  background-color: var(--button-hover);
+}
