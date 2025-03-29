@@ -84,6 +84,4 @@ https://api.themoviedb.org/3/tv/popular?api_key={apiKey}
 ## 🚀 Deployment
 Easily deploy this project using:
 - **Vercel**
-
-
-🌟 **Happy Coding & Enjoy the Movies!** 🎥
+[Live Demo](https://movies-app-react-project-mocha.vercel.app/)
