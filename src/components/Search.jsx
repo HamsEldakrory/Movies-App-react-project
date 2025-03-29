@@ -8,7 +8,6 @@ const Search = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log(search);
     navigate(`/search?query=${search}`);
   };
 
@@ -17,6 +16,7 @@ const Search = () => {
       <label htmlFor="search" className="visually-hidden">
         Search
       </label>
+
       <input
         type="text"
         placeholder="Search And Explore"
@@ -25,7 +25,8 @@ const Search = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <Button variant="warning" type="submit">
+
+      <Button variant="warning" type="submit" className="custom-button">
         Search
       </Button>
     </form>
