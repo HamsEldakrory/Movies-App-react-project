@@ -10,6 +10,8 @@ import Search from '../components/Search';
 import CustomPagination from '../components/Pagination';
 import { Container, Row, Col } from 'react-bootstrap';
 
+import useMovies from '../hooks/useMovies';
+
 const MovieList = () => {
   const { data, isLoading, error } = useMovies();
 
@@ -21,7 +23,7 @@ const MovieList = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  if (!data.shows.length) {
+  if (!data.movies.length) {
     return <div>No movies are found.</div>;
   }
 
