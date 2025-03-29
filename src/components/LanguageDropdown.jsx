@@ -1,16 +1,16 @@
 import React from 'react';
+import '../styles/LanguageDropdown.css';
 
 function LanguageDropdown() {
   return (
-    <select
-      className="me-2 bg-dark "
-      style={{ color: 'white', borderRadius: '4px', padding: '5px' }}
-    >
-      <option value="en">EN</option>
-      <option value="es">AR</option>
-      <option value="fr">FR</option>
-      <option value="zh">ZH</option>
-    </select>
+    <div className="dropdown-container">
+      <select className="language-dropdown">
+        <option value="en">EN</option>
+        <option value="ar">AR</option>
+        <option value="fr">FR</option>
+        <option value="zh">ZH</option>
+      </select>
+    </div>
   );
 }
 
