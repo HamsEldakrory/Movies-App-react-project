@@ -8,43 +8,38 @@ import { getMovies } from '../api/movieService';
 import MainPageCard from '../components/MainPageCard';
 import Search from '../components/Search';
 import CustomPagination from '../components/Pagination';
-import { Container, Row, Col } from'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+
+import useMovies from '../hooks/useMovies';
 
 const MovieList = () => {
-  const dispatch = useDispatch();
-  const watchlist = useSelector((state) => state.watchlist.watchlist);
-  const [ movies, setMovies ] = useState([]);
-  const [ totalResults, setTotalResults ] = useState(0);
-  const [ totalPages, setTotalPages ] = useState(0);
+  const { data, isLoading, error } = useMovies();
 
-  useEffect(() => {
-    getMovies(1).then((response) => {
-      setMovies(response.movies);
-      setTotalResults(response.totalResults);
-      setTotalPages(response.totalPages);
-      console.log(response);
-    }).catch((error) => console.error(error));
-  }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!data.movies.length) {
+    return <div>No movies are found.</div>;
+  }
+
+  const movieCards = data.movies.map((movie) => (
+    <Col className="d-flex mb-3" key={movie.id} md={4} lg={2} sm={12}>
+      <MainPageCard showItem={movie} showType={'movie'} />
+    </Col>
+  ));
 
   return (
-    <div style={{ padding: '20px' }}>
-      <Search></Search>
-      <h1 className='p-4'>Movies List</h1>
-        <Container>
-          <Row className=''>
-            {movies.map((movie) => (
-              <Col className='d-flex mb-3' key={movie.id} md={4} lg={2} sm={12}>
-                <MainPageCard
-                  showItem={movie}
-                  showType={'movie'}
-                />
-              </Col>
-            ))}
-          </Row>
-        </Container>
-        <CustomPagination totalPages={totalPages} />
-    </div>
+    <Container>
+      <Search />
+      <h1 className="p-4">Movies List</h1>
+      <Row className="">{movieCards}</Row>
+      <CustomPagination totalPages={data.totalPages} />
+    </Container>
   );
 };
 
