@@ -72,7 +72,7 @@ const MainPageCard = (props) => {
         <Link className="text-decoration-none text-black mb-auto"
               to={
                 showType =='movie' ? 
-                `/movie/${showItem.id}` :
+                `/movies/${showItem.id}` :
                 `/tv-shows/${showItem.id}`
               }>
             <Card.Title 
