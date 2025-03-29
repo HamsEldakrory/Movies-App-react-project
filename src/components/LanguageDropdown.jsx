@@ -1,7 +1,10 @@
 import React from 'react';
+import useLanguage from '../hooks/useLanguage';
 import '../styles/LanguageDropdown.css';
 
 function LanguageDropdown() {
+  const { language, changeLanguage } = useLanguage();
+
   return (
     <div className="dropdown-container">
       <select className="language-dropdown">

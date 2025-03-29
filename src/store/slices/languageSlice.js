@@ -9,7 +9,6 @@ const languageSlice = createSlice({
   reducers: {
     setLanguage: (state, action) => {
       state.language = action.payload;
-      state.direction = action.payload === 'ar' ? 'rtl' : 'ltr';
     },
   },
 });

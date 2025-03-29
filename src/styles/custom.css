@@ -1,12 +1,12 @@
 :root {
-  --primary-bg: #000000; /* Black background */
-  --primary-text: #ffffff; /* White text */
-  --accent-color: #ffc107; /* Yellow for ratings and highlights */
-  --secondary-text: #bdbdbd; /* Light gray for subtitles */
-  --button-bg: #303030; /* Dark gray for buttons */
-  --button-hover: #424242; /* Slightly lighter gray on hover */
-  --card-bg: #1c1c1c; /* Dark card background */
-  --star-color: #ffcc00; /* Gold stars for ratings */
+  --primary-bg: #000000;
+  --primary-text: #ffffff;
+  --accent-color: #ffc107;
+  --secondary-text: #bdbdbd;
+  --button-bg: #303030;
+  --button-hover: rgb(212, 159, 1);
+  --card-bg: #1c1c1c;
+  --star-color: #ffcc00;
 }
 * {
   margin: 0;
@@ -75,7 +75,6 @@ body {
   color: var(--primary-bg) !important;
   border: none;
   font-weight: bold;
-  margin-top: 12px;
 }
 .custom-button:hover {
   background-color: var(--button-hover) !important;
@@ -96,4 +95,42 @@ body {
 }
 .star:hover {
   cursor: pointer;
+}
+/* Not found page*/
+.notfound-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.notfound-title {
+  font-size: 6rem;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+.notfound-text {
+  font-size: 1.5rem;
+  color: var(--secondary-text);
+  margin-top: 10px;
+}
+.notfound-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: var(--button-bg);
+  color: var(--primary-text);
+  text-decoration: none;
+  border-radius: 8px;
+}
+.notfound-button:hover {
+  background-color: var(--button-hover);
+}
+
+/* Pagination Styles */
+.page-item.active > .page-link {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+}
+.page-link {
+  color: var(--primary-bg) !important;
 }
