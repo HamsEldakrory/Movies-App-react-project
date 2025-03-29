@@ -61,8 +61,8 @@ const SearchResults = () => {
             key={movie.id}
             xs={12}
             sm={6}
-            lg={4}
-            xl={3}
+            lg={2}
+            xl={2}
             className="d-flex justify-content-center"
           >
             <MainPageCard showItem={movie} />
