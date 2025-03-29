@@ -23,7 +23,7 @@ const MovieDetailsPage = () => {
     movieError,
     recError,
     reviewsError,
-  } = useMovies({ movieId });
+  } = useMovies(movieId);
 
   if (!movieId) {
     return <p className="text-light text-center mt-5">Invalid movie ID</p>;
