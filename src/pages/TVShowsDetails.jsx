@@ -34,6 +34,8 @@ const TvShowDetailsPage = () => {
     );
   }
 
+  console.log(reviews);
+
   return (
     <Container className="mt-5 p-4">
       <Row className="align-items-center">
