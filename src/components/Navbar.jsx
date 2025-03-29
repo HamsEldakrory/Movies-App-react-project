@@ -1,23 +1,24 @@
 import React from 'react';
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap';
-import { Search, Bookmark, User } from 'lucide-react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Search, Bookmark } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectWatchlistCount } from '../store/slices/watchlistSlice';
 import LanguageDropdown from './LanguageDropdown';
-
 import '../styles/navbar.css';
+
 const IMDbNavbar = () => {
+  const watchlistCount = useSelector(selectWatchlistCount);
+
   return (
     <Navbar expand="lg" className="cinema-navbar shadow" fixed="top">
       <Container fluid className="navbar-container">
-        {/* Logo */}
         <Navbar.Brand as={Link} to="/" className="cinema-logo">
           <span className="logo-text">CinemaScore</span>
         </Navbar.Brand>
 
-        {/* Toggle Button */}
         <Navbar.Toggle aria-controls="cinema-navbar-nav" className="custom-toggle" />
 
-        {/* Navigation Items */}
         <Navbar.Collapse id="cinema-navbar-nav">
           <Nav className="me-auto nav-links">
             <Nav.Link as={NavLink} to="/" className="nav-item">
@@ -28,14 +29,16 @@ const IMDbNavbar = () => {
             </Nav.Link>
           </Nav>
 
-          {/* Right Side Icons */}
-          <Nav className="ms-auto nav-actions">
-            <Nav.Link as={Link} to="/search" className="nav-icon">
-              <Search size={22} />
+          <Nav className="ms-auto nav-actions d-flex align-items-center">
+            <Nav.Link as={Link} to="/search" className="nav-icon position-relative">
+              <Search size={30} />
             </Nav.Link>
-            <Nav.Link as={Link} to="/watch-list" className="nav-icon">
-              <Bookmark size={22} />
+
+            <Nav.Link as={Link} to="/watch-list" className="nav-icon position-relative">
+              <Bookmark size={30} />
+              {watchlistCount > 0 && <span className="badge">{watchlistCount}</span>}
             </Nav.Link>
+
             <Nav.Link as={NavLink} className="nav-icon language-drop">
               <LanguageDropdown />
             </Nav.Link>
