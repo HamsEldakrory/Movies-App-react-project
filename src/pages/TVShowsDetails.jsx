@@ -6,6 +6,7 @@ import WatchListButton from '../components/WatchListButton';
 import Rating from '../components/Rating';
 import Recommendations from '../components/Recommendations';
 import Reviews from '../components/Reviews';
+import Genre from '../components/Genre';
 
 const placeholderImage = 'https://placehold.co/600x400?text=Not Found';
 
@@ -67,11 +68,7 @@ const TvShowDetailsPage = () => {
             {show.overview || 'No description available.'}
           </p>
 
-          {show.genres.map((genre) => (
-            <Badge key={genre.id} className="genre-badge">
-              {genre.name}
-            </Badge>
-          ))}
+          <Genre genres={show.genres} />
 
           <div className="my-3 d-flex gap-4">
             <strong>Seasons:</strong> {show?.number_of_seasons || 'N/A'}
@@ -91,6 +88,7 @@ const TvShowDetailsPage = () => {
         isLoading={isRecLoading}
         error={recError}
         recommendations={recommendations}
+        category="shows"
       />
 
       {/* Reviews Section */}

@@ -2,7 +2,7 @@ import { Spinner } from 'react-bootstrap';
 import Carousel from 'react-multi-carousel';
 import MainPageCard from './MainPageCard';
 
-const Recommendations = ({ isLoading, error, recommendations }) => {
+const Recommendations = ({ isLoading, error, recommendations, category = 'Movies' }) => {
   if (isLoading) {
     return (
       <h4 className="text-light text-center mt-4">
@@ -25,7 +25,7 @@ const Recommendations = ({ isLoading, error, recommendations }) => {
 
   return (
     <div>
-      <h3 className="fw-bold mt-5 text-white">Recommended Shows</h3>
+      <h3 className="fw-bold mt-5 text-white">Recommended {category}</h3>
 
       <Carousel
         responsive={{

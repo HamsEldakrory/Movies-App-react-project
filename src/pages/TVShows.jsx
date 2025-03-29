@@ -20,7 +20,7 @@ const TVList = () => {
   }
 
   const tvShowCards = data.shows.map((tvShow) => (
-    <Col className="d-flex mb-3" key={tvShow.id} md={4} lg={2} sm={12}>
+    <Col className="d-flex mb-3" key={tvShow.id} sm={12} md={6} lg={4} xl={3}>
       <MainPageCard showItem={tvShow} showType={'tv'} />
     </Col>
   ));

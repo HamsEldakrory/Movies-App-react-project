@@ -20,7 +20,7 @@ const MovieList = () => {
   }
 
   const movieCards = data.movies.map((movie) => (
-    <Col className="d-flex mb-3" key={movie.id} md={4} lg={2} sm={12}>
+    <Col className="d-flex mb-3" key={movie.id} sm={12} md={6} lg={4} xl={3}>
       <MainPageCard showItem={movie} showType={'movie'} />
     </Col>
   ));
@@ -29,7 +29,7 @@ const MovieList = () => {
     <Container>
       <Search />
       <h1 className="p-4">Movies List</h1>
-      <Row className="">{movieCards}</Row>
+      <Row>{movieCards}</Row>
       <CustomPagination totalPages={data.totalPages} />
     </Container>
   );

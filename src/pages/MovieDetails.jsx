@@ -8,6 +8,7 @@ import Production from '../components/Production';
 import Rating from '../components/Rating';
 import Recommendations from '../components/Recommendations';
 import Reviews from '../components/Reviews';
+import Genre from '../components/Genre';
 
 const placeholderImage = 'https://placehold.co/600x400?text=Not Found';
 
@@ -68,11 +69,7 @@ const MovieDetailsPage = () => {
             {movie.overview || 'No description available.'}
           </p>
 
-          {movie.genres.map((genre) => (
-            <Badge key={genre.id} className="genre-badge">
-              {genre.name}
-            </Badge>
-          ))}
+          <Genre genres={movie.genres} />
 
           <div className="mt-3 d-flex gap-4">
             <strong>Duration:</strong> {movie?.runtime ? `${movie.runtime} Min.` : 'N/A'}
@@ -95,6 +92,7 @@ const MovieDetailsPage = () => {
         isLoading={isRecLoading}
         error={recError}
         recommendations={recommendations}
+        category="Movies"
       />
 
       {/* Reviews Section */}
