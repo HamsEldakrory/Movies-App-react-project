@@ -3,35 +3,44 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToWatchlist, removeFromWatchlist } from '../store/slices/watchlistSlice';
 import { Link } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import WatchListButton from '../components/WatchListButton';
+import { useState, useEffect } from 'react';
+import { getMovies } from '../api/movieService';
+import MainPageCard from '../components/MainPageCard';
+
+import { Container, Row, Col } from'react-bootstrap';
+
 const MovieList = () => {
-  const movies = [
-    { id: 1, title: 'Black Widow ' },
-    { id: 2, title: 'The Good Doctor' },
-    { id: 3, title: 'Dexter' },
-    { id: 4, title: 'The BlackList' },
-  ];
+  const dispatch = useDispatch();
+  const watchlist = useSelector((state) => state.watchlist.watchlist);
+  const [ movies, setMovies ] = useState([]);
+  const [ totalResults, setTotalResults ] = useState(0);
+  const [ totalPages, setTotalPages ] = useState(0);
+
+  useEffect(() => {
+    getMovies(1).then((response) => {
+      setMovies(response.movies);
+      setTotalResults(response.totalResults);
+      setTotalPages(response.totalPages);
+      console.log(response);
+    }).catch((error) => console.error(error));
+  }, []);
+
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Movie List</h1>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {movies.map((movie) => (
-          <li
-            key={movie.id}
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              padding: '10px',
-              borderBottom: '1px solid #ccc',
-            }}
-          >
-            <Link style={{ color: 'black', textDecoration: 'none' }}>{movie.title}</Link>
-            <WatchListButton movie={movie} />
-          </li>
-        ))}
-      </ul>
+      <h1 className='p-4'>Movies List</h1>
+        <Container>
+          <Row className=''>
+            {movies.map((movie) => (
+              <Col className='d-flex mb-3' key={movie.id} md={4} lg={2} sm={12}>
+                <MainPageCard
+                  showItem={movie}
+                  showType={'movie'}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Container>
     </div>
   );
 };

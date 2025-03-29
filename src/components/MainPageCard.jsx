@@ -10,7 +10,7 @@ import 'react-circular-progressbar/dist/styles.css';
 const placeholderImage = 'https://placehold.co/307x400?text=Not Found';
 
 const MainPageCard = (props) => {
-  const { showItem } = props;
+  const { showItem, showType } = props;
   const dispatch = useDispatch();
   const watchlist = useSelector((state) => state.watchlist.watchlist);
 
@@ -40,22 +40,38 @@ const MainPageCard = (props) => {
   }
 
   return (
-    <Card className="border-0" style={{ width: '25rem' }}>
-      <Link to={`/movies/${showItem.id}`}>
-        <div>
-          <Card.Img
-            variant="top"
-            src={
-              showItem.poster_path
-                ? config.TMDB_IMAGE_BASE_URL + showItem.poster_path
-                : placeholderImage
-            }
-            style={{ height: '400px' }}
-          />
-        </div>
-      </Link>
+    <Card className="border-0 flex-fill" style={{ width: '18rem', height: '430px' }}>
+      {showType == 'movie' ? (
+        <Link to={`/movies/${showItem.id}`}>
+          <div>
+            <Card.Img
+              variant="top"
+              src={
+                showItem.poster_path
+                  ? config.TMDB_IMAGE_BASE_URL + showItem.poster_path
+                  : placeholderImage
+              }
+              style={{}}
+            />
+          </div>
+        </Link>
+      ) : (
+        <Link to={`/tv-shows/${showItem.id}`}>
+          <div>
+            <Card.Img
+              variant="top"
+              src={
+                showItem.poster_path
+                  ? config.TMDB_IMAGE_BASE_URL + showItem.poster_path
+                  : placeholderImage
+              }
+              style={{}}
+            />
+          </div>
+        </Link>
+      )}
 
-      <Card.Body className="mt-3" style={{ position: 'relative' }}>
+      <Card.Body className="mt-3 d-flex flex-column" style={{ position: 'relative' }}>
         <div
           style={{ width: 60, height: 60, top: '-50px', left: '18px' }}
           className="position-absolute"
@@ -68,14 +84,23 @@ const MainPageCard = (props) => {
             styles={buildStyles(circularProgress)}
           />
         </div>
-        <Link className="text-decoration-none text-black" to={`/movie/${showItem.id}`}>
-          <Card.Title style={{ fontSize: '18px', textDecoration: 'none' }}>
-            {showItem.title}
-          </Card.Title>
-        </Link>
-        <div className="d-flex align-items-center justify-content-between">
+        {showType == 'movie' ? (
+          <Link className="text-decoration-none text-black mb-auto" to={`/movie/${showItem.id}`}>
+            <Card.Title style={{ fontSize: '18px', textDecoration: 'none' }}>
+              {showItem.title}
+            </Card.Title>
+          </Link>
+        ) : (
+          <Link className="text-decoration-none text-black" to={`/tv-shows/${showItem.id}`}>
+            <Card.Title style={{ fontSize: '18px', textDecoration: 'none' }}>
+              {showItem.name}
+            </Card.Title>
+          </Link>
+        )}
+        <div className="d-flex mt-auto align-items-center justify-content-between">
           <Card.Text className="text-muted mb-0">
-            <span>{showItem.release_date}</span>
+            {showType == 'movie'? <span>{showItem.release_date}</span> : <span>{showItem.first_air_date}</span> }
+            
           </Card.Text>
           <button
             onClick={() => handleToggleWatchlist(showItem)}
