@@ -86,5 +86,4 @@ Easily deploy this project using:
 - **Vercel**
 
 
-🌟 **Happy Coding & Enjoy the Movies!** 🎥 🍿
-
+🌟 **Happy Coding & Enjoy the Movies!** 🎥
