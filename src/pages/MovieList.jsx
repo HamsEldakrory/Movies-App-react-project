@@ -1,15 +1,7 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToWatchlist, removeFromWatchlist } from '../store/slices/watchlistSlice';
-import { Link, useParams } from 'react-router-dom';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import { useState, useEffect } from 'react';
-import { getMovies } from '../api/movieService';
 import MainPageCard from '../components/MainPageCard';
 import Search from '../components/Search';
 import CustomPagination from '../components/Pagination';
 import { Container, Row, Col } from 'react-bootstrap';
-
 import useMovies from '../hooks/useMovies';
 
 const MovieList = () => {
