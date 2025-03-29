@@ -1,0 +1,146 @@
+/* CinemaScoreNavbar.css */
+:root {
+  --primary-bg: #000000; /* Black background */
+  --primary-text: #ffffff; /* White text */
+  --accent-color: #ffc107; /* Yellow for ratings and highlights */
+  --secondary-text: #bdbdbd; /* Light gray for subtitles */
+  --button-bg: #303030; /* Dark gray for buttons */
+  --button-hover: #424242; /* Slightly lighter gray on hover */
+  --card-bg: #1c1c1c; /* Dark card background */
+  --star-color: #ffcc00; /* Gold stars for ratings */
+}
+
+.cinema-navbar {
+  background: linear-gradient(90deg, var(--primary-bg) 0%, var(--card-bg) 100%);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+  padding: 0.8rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  padding: 0 20px;
+}
+
+.cinema-logo {
+  position: relative;
+  padding: 0.2rem 0.8rem;
+}
+
+.logo-text {
+  background: var(--accent-color); /* Yellow logo background */
+  color: var(--primary-bg); /* Black text on yellow */
+  font-weight: 800;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.logo-text:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.5); /* Yellow glow */
+}
+
+.custom-toggle {
+  border: none;
+  background-color: var(--accent-color) !important; /* Yellow toggle */
+  color: var(--primary-bg) !important;
+}
+
+.custom-toggle:focus {
+  box-shadow: none;
+}
+
+.nav-links {
+  margin-left: 2rem;
+}
+
+.nav-item {
+  color: var(--primary-text) !important;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  position: relative;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.nav-item:hover {
+  color: var(--accent-color) !important;
+}
+
+.nav-item.active {
+  color: var(--accent-color) !important;
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background: var(--accent-color);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+  width: 50%;
+}
+
+.nav-actions {
+  gap: 1rem;
+}
+
+.nav-icon {
+  color: var(--primary-text) !important;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-icon:hover {
+  color: var(--accent-color) !important;
+  transform: translateY(-2px);
+}
+
+.language-drop {
+  padding: 0;
+}
+
+@media (max-width: 991px) {
+  .nav-links {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .nav-item {
+    padding: 0.8rem 1rem;
+  }
+
+  .nav-actions {
+    padding: 1rem;
+    justify-content: flex-start;
+  }
+}
+
+.navbar-collapse {
+  transition: all 0.3s ease;
+}
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+}
