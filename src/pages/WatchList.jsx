@@ -30,7 +30,7 @@ const WatchList = () => {
             </button>
             <div className="d-flex flex-wrap">
               {watchlist.map((item) => (
-                <WatchListCard key={item.id} movie={item} />
+                <WatchListCard key={item.id} showItem={item} />
               ))}
             </div>
           </>
