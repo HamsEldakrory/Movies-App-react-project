@@ -2,22 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { getTVShowDetails, getTVShowRecommendations } from '../api/tvService';
 import { getTVShowReviews } from '../api/reviewService';
 
-const useTvShowDetails = ({ tvShowId }) => {
-  if (!tvShowId) {
-    return {
-      tvShow: null,
-      recommendations: [],
-      reviews: [],
-      isTvShowLoading: false,
-      isRecLoading: false,
-      isReviewsLoading: false,
-      tvShowError: null,
-      recError: null,
-      reviewsError: null,
-    };
-  }
+const useTvShowDetails = (tvShowId) => {
   const {
-    data: tvShow = null,
+    data: show,
     isLoading: isTvShowLoading,
     error: tvShowError,
   } = useQuery({
@@ -27,7 +14,7 @@ const useTvShowDetails = ({ tvShowId }) => {
   });
 
   const {
-    data: recommendations = [],
+    data: recommendations,
     isLoading: isRecLoading,
     error: recError,
   } = useQuery({
@@ -37,7 +24,7 @@ const useTvShowDetails = ({ tvShowId }) => {
   });
 
   const {
-    data: reviews = [],
+    data: reviews,
     isLoading: isReviewsLoading,
     error: reviewsError,
   } = useQuery({
@@ -47,7 +34,7 @@ const useTvShowDetails = ({ tvShowId }) => {
   });
 
   return {
-    tvShow,
+    show,
     recommendations,
     reviews,
     isTvShowLoading,
