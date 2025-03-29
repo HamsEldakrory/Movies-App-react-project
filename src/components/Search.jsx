@@ -8,6 +8,7 @@ const Search = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
+    if (!search || !search.trim()) return;
     navigate(`/search?query=${search}`);
   };
 
