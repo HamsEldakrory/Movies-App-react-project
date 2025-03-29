@@ -46,7 +46,8 @@
 
 .custom-toggle {
   border: none;
-  color: var(--accent-color); /* Yellow toggle */
+  background-color: var(--accent-color) !important; /* Yellow toggle */
+  color: var(--primary-bg) !important;
 }
 
 .custom-toggle:focus {
