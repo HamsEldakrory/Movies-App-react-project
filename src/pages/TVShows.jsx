@@ -6,7 +6,8 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { getTVShows } from '../api/tvService';
 import MainPageCard from '../components/MainPageCard';
-
+import CustomPagination from '../components/Pagination';
+import Search from '../components/Search';
 import { Container, Row, Col } from'react-bootstrap';
 
 const TVList = () => {
@@ -28,6 +29,7 @@ const TVList = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+      <Search></Search>
       <h1 className='p-4'>Now Playing</h1>
         <Container>
           <Row className=''>
@@ -41,6 +43,7 @@ const TVList = () => {
             ))}
           </Row>
         </Container>
+        <CustomPagination totalPages={totalPages} />
     </div>
   );
 };

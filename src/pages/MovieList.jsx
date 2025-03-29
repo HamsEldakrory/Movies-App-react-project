@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWatchlist, removeFromWatchlist } from '../store/slices/watchlistSlice';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { getMovies } from '../api/movieService';
 import MainPageCard from '../components/MainPageCard';
-
+import Search from '../components/Search';
+import CustomPagination from '../components/Pagination';
 import { Container, Row, Col } from'react-bootstrap';
 
 const MovieList = () => {
@@ -28,6 +29,7 @@ const MovieList = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+      <Search></Search>
       <h1 className='p-4'>Movies List</h1>
         <Container>
           <Row className=''>
@@ -41,6 +43,7 @@ const MovieList = () => {
             ))}
           </Row>
         </Container>
+        <CustomPagination totalPages={totalPages} />
     </div>
   );
 };
