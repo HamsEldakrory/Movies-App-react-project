@@ -7,7 +7,11 @@ function LanguageDropdown() {
 
   return (
     <div className="dropdown-container">
-      <select className="language-dropdown">
+      <select
+        className="language-dropdown"
+        value={language}
+        onChange={(e) => changeLanguage(e.target.value)}
+      >
         <option value="en">EN</option>
         <option value="ar">AR</option>
         <option value="fr">FR</option>
