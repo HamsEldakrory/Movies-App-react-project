@@ -14,7 +14,12 @@ const Reviews = ({ isLoading, error, reviews }) => {
   }
 
   if (!reviews.length) {
-    return <p className="text-secondary">No reviews yet.</p>;
+    return (
+      <div className="my-3">
+        <h3 className="fw-bold mt-5 ">Reviews</h3>
+        <p className="text-secondary">No reviews yet.</p>
+      </div>
+    );
   }
 
   const reviewCards = reviews.map((review) => (
@@ -27,7 +32,7 @@ const Reviews = ({ isLoading, error, reviews }) => {
   ));
 
   return (
-    <div>
+    <div className="my-3">
       <h3 className="fw-bold mt-5 ">Reviews</h3>
       <div className="mt-3">{reviewCards}</div>
     </div>

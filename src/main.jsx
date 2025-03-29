@@ -6,7 +6,7 @@ import store from './store';
 import App from './App.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-multi-carousel/lib/styles.css';
-import './index.css';
+import './styles/custom.css';
 
 const queryClient = new QueryClient();
 

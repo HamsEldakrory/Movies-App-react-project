@@ -52,7 +52,7 @@ const TvShowDetailsPage = () => {
         <Col md={8}>
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="fw-bold text-accent fs-0">{show.name || 'Unknown Title'}</h1>
-            <WatchListButton show={show} />
+            <WatchListButton movie={show} />
           </div>
 
           <p className="text-secondary">
