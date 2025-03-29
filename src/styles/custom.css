@@ -88,3 +88,12 @@ body {
 .star:hover {
   cursor: pointer;
 }
+
+/* Pagination Styles */
+.page-item.active > .page-link {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+}
+.page-link {
+  color: var(--primary-bg) !important;
+}
