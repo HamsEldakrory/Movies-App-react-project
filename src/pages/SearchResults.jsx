@@ -5,7 +5,7 @@ import MainPageCard from '../components/MainPageCard';
 import CustomPagination from '../components/Pagination';
 
 const SearchResults = () => {
-  const { data, isLoading, isError, error, query } = useSearchResults();
+  const { data, isLoading, isError, error, query, category } = useSearchResults();
 
   if (!query) {
     return (
@@ -38,7 +38,11 @@ const SearchResults = () => {
     );
   }
 
-  if (!data.movies.length) {
+  const itemsData = category === 'movies' ? data.movies : data.shows;
+
+  console.log(itemsData);
+
+  if (!itemsData.length) {
     return (
       <Container className="my-5">
         <Search />
@@ -54,7 +58,7 @@ const SearchResults = () => {
         <span className="fw-bold">Search Results For:</span> {query}
       </h1>
       <Row className="gy-3 mt-4">
-        {data.movies.map((movie) => (
+        {itemsData.map((movie) => (
           <Col
             key={movie.id}
             xs={12}

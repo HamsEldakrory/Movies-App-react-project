@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router';
 const Search = () => {
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
-
+  const [category, setCategory] = useState('movies');
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (!search || !search.trim()) return;
-    navigate(`/search?query=${search}`);
+    navigate(`/search?query=${search}&category=${category}`);
   };
 
   return (
@@ -17,6 +17,17 @@ const Search = () => {
       <label htmlFor="search" className="visually-hidden">
         Search
       </label>
+
+      <div className="dropdown-container">
+        <select
+          className="language-dropdown"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="movies">movies</option>
+          <option value="shows">tv shows</option>
+        </select>
+      </div>
 
       <input
         type="text"
