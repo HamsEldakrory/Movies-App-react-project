@@ -16,6 +16,15 @@
 body {
   background-color: var(--primary-bg);
   color: var(--primary-text);
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  overflow-x: hidden;
+  margin: 0;
+  padding-top: 100px;
 }
 .text-white {
   color: var(--primary-text) !important;
@@ -124,4 +133,19 @@ body {
 }
 .page-link {
   color: var(--primary-bg) !important;
+}
+
+
+
+/* Watchlist */
+.back-home-btn{
+  background-color: var(--button-bg);
+  color: var(--primary-text);
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.back-home-btn:hover{
+  background-color: var(--button-hover);
 }

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Heart } from 'lucide-react';
 import { removeFromWatchlist } from '../store/slices/watchlistSlice';
 import '../styles/custom.css';
+import '../styles/tv-show.css';
 
 const showData = {
   adult: false,
@@ -204,8 +205,8 @@ const TVShowsDetails = () => {
       day: 'numeric',
     });
   };
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const [selectedSeason, setSelectedSeason] = useState(null);
 
   const handleSeasonClick = (season) => {
@@ -216,180 +217,181 @@ const TVShowsDetails = () => {
     setSelectedSeason(null);
   };
 
-  const handleRemoveFromWatchlist = () => {
-    dispatch(removeFromWatchlist(30));
-  };
   return (
-    <Container className="my-4">
-      <Row className="mb-4">
-        <Col md={4}>
-          <Image
-            src={`https://image.tmdb.org/t/p/w500${showData.poster_path}`}
-            alt={showData.name}
-            fluid
-            rounded
-            className="shadow-lg"
-          />
-        </Col>
-        <Col md={8}>
-          <div className="d-flex flex-column mb-4">
-            <h1 className="display-4 text-dark fw-bolder  ">
-              {showData.name}{' '}
-              <Button
-                onClick={handleRemoveFromWatchlist}
-                className="float-end border-0"
-                style={{
-                  background: 'none',
-                  width: '40px',
-                  height: '40px',
-                }}
-              >
-                <Heart fill="#FFE353" size={40} />
-              </Button>{' '}
-            </h1>
-            <span className="text-muted small">
-              {formatDate(showData.first_air_date)} - {formatDate(showData.last_air_date)}
-            </span>
-          </div>
-          <Row className="mb-3 ">
-            <Col>
-              <div className="d-flex align-items-center gap-2">
-                <div className="d-flex flex-row align-items-center gap-1 star ">
-                  <Star className="text-dark " fill="dark" size={20} />
-                  <Star className="text-dark " fill="dark" size={20} />
-                  <Star className="text-dark " fill="dark" size={20} />
-                  <Star className="text-dark " fill="dark" size={20} />
-                  <Star className="text-dark" size={20} />
-                </div>{' '}
-                <span>
-                  {showData.vote_average.toFixed(1)} / 10
-                  <small className="text-muted ms-2">({showData.vote_count} votes)</small>
-                </span>
-              </div>
-            </Col>
-          </Row>
+    <div className="tv-show-details">
+      <Container className="py-4">
+        <Row className="mb-5">
+          <Col lg={4} className="mb-4 mb-lg-0">
+            <Image
+              src={`https://image.tmdb.org/t/p/w500${showData.poster_path}`}
+              alt={showData.name}
+              fluid
+              className="tv-show-poster"
+            />
+          </Col>
 
-          <Row className="mb-3">
-            <p className="mt-3 " style={{ fontSize: '20px' }}>
-              {' '}
-              {showData.overview}
-            </p>
-            <div className="my-3">
+          <Col lg={8}>
+            <div className="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h1 className="show-title">{showData.name}</h1>
+                <p className="show-meta">
+                  {formatDate(showData.first_air_date)} - {formatDate(showData.last_air_date)}
+                </p>
+              </div>
+              <Button  className="heart-btn border-0 bg-transparent p-0">
+                <Heart  fill="#FFE353" size={32} />
+              </Button>
+            </div>
+
+            <div className="d-flex align-items-center mb-4">
+              <div className="d-flex me-3">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={
+                      i < Math.floor(showData.vote_average / 2) ? 'text-warning' : 'text-secondary'
+                    }
+                    fill={i < Math.floor(showData.vote_average / 2) ? '#FFE353' : 'none'}
+                    size={20}
+                  />
+                ))}
+              </div>
+              <span className="text-dark">
+                {showData.vote_average.toFixed(1)}/10{' '}
+                <small className="text-muted">({showData.vote_count} votes)</small>
+              </span>
+            </div>
+
+            <p className="show-description mb-4">{showData.overview}</p>
+
+            <div className="mb-4">
               {showData.genres.map((genre) => (
-                <Badge key={genre.id} bg="warning" className="me-2 p-3 rounded-pill">
+                <Badge key={genre.id} bg="warning" className="genre-badge">
                   {genre.name}
                 </Badge>
               ))}
             </div>
-            <Col>
-              <div className="d-flex flex-wrap gap-md-4 gap-3">
-                <div className="d-flex align-items-center gap-2">
-                  <Clock className="me-2" />
-                  <strong>Duration:</strong>
-                  <span>{showData.episode_run_time[0]} min per episode</span>
-                </div>
-                <div className="d-flex align-items-center gap-2">
-                  <Globe className="me-2" />
-                  <strong>Languages:</strong>
-                  <span>{showData.spoken_languages[0].english_name}</span>
-                </div>
-                <div className="d-flex align-items-center gap-2">
-                  <Calendar className="me-2" />
-                  <strong>Total Seasons:</strong>
-                  <span>{showData.number_of_seasons}</span>
-                </div>{' '}
-                <div className="d-flex align-items-center gap-2">
-                  <Calendar className="me-2" />
-                  <strong>Total Episodes:</strong>
-                  <span>{showData.number_of_episodes}</span>
-                </div>
-              </div>
-            </Col>
 
-            <div className="d-flex align-items-center mt-3">
-              {showData.networks.map((network) => (
-                <div key={network.id} className="me-3 text-center">
+            <Card className="mb-4 border-0 shadow-sm">
+              <Card.Body>
+                <Row>
+                  <Col md={6} className="mb-3 mb-md-0">
+                    <div className="d-flex align-items-center mb-2">
+                      <Clock className="info-icon" />
+                      <span>
+                        <strong>Duration:</strong> {showData.episode_run_time[0]} min per episode
+                      </span>
+                    </div>
+                    <div className="d-flex align-items-center">
+                      <Calendar className="info-icon" />
+                      <span>
+                        <strong>Seasons:</strong> {showData.number_of_seasons}
+                      </span>
+                    </div>
+                  </Col>
+                  <Col md={6}>
+                    <div className="d-flex align-items-center mb-2">
+                      <Globe className="info-icon" />
+                      <span>
+                        <strong>Language:</strong> {showData.spoken_languages[0].english_name}
+                      </span>
+                    </div>
+                    <div className="d-flex align-items-center">
+                      <Calendar className="info-icon" />
+                      <span>
+                        <strong>Episodes:</strong> {showData.number_of_episodes}
+                      </span>
+                    </div>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+
+            {showData.networks && showData.networks.length > 0 && (
+              <div className="d-flex align-items-center">
+                <span className="me-3">
+                  <strong>Network:</strong>
+                </span>
+                {showData.networks.map((network) => (
                   <Image
+                    key={network.id}
                     src={`https://image.tmdb.org/t/p/original${network.logo_path}`}
                     alt={network.name}
-                    width={150}
-                    height={50}
-                    className="mb-1"
+                    className="network-logo me-3"
                   />
-                </div>
-              ))}
-            </div>
-          </Row>
-        </Col>
-      </Row>
+                ))}
+              </div>
+            )}
+          </Col>
+        </Row>
 
-      {showData.seasons && showData.seasons.length > 0 && (
-        <Card>
-          <Card.Body>
-            <Card.Title className="mb-4">Seasons</Card.Title>
-            <Row>
-              {showData.seasons.map((season) => (
-                <Col key={season.id} md={4} className="mb-3">
-                  <Card role="button" onClick={() => handleSeasonClick(season)} className="h-100">
-                    <Card.Img
-                      variant="top"
-                      src={`https://image.tmdb.org/t/p/w300${season.poster_path}`}
-                      alt={season.name}
-                      style={{ height: '400px', objectFit: 'cover' }}
-                    />
-                    <Card.Body>
-                      <Card.Title>{season.name}</Card.Title>
+        {showData.seasons && showData.seasons.length > 0 && (
+          <Card className="border-0 shadow-sm">
+            <Card.Body>
+              <Card.Title className="mb-4 fs-3">Seasons</Card.Title>
+              <Row>
+                {showData.seasons.map((season) => (
+                  <Col key={season.id} xl={2} lg={3} md={4} sm={6} className="mb-4">
+                    <Card onClick={() => handleSeasonClick(season)} className="season-card h-100">
+                      <Card.Img
+                        variant="top"
+                        src={`https://image.tmdb.org/t/p/w300${season.poster_path}`}
+                        alt={season.name}
+                        className="season-card-img"
+                      />
+                      <Card.Body>
+                        <Card.Title className="h6">{season.name}</Card.Title>
+                        <div className="d-flex align-items-center">
+                          <Star className="text-warning me-1" size={16} />
+                          <small>{season.vote_average.toFixed(1)}</small>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </Card.Body>
+          </Card>
+        )}
+      </Container>
 
-                      <div className="d-flex align-items-center gap-2">
-                        <Star className="text-warning" size={20} />
-                        <span>{season.vote_average.toFixed(1)} / 10</span>
-                      </div>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          </Card.Body>
-        </Card>
-      )}
-
+      {/* Season Details Modal */}
       {selectedSeason && (
         <Modal show={!!selectedSeason} onHide={handleCloseModal} centered>
-          <Modal.Header closeButton>
+          <Modal.Header closeButton className="border-0">
             <Modal.Title>{selectedSeason.name}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <div className="text-center mb-3">
+          <Modal.Body className="py-0">
+            <div className="text-center mb-4">
               {selectedSeason.poster_path && (
                 <Image
                   src={`https://image.tmdb.org/t/p/w300${selectedSeason.poster_path}`}
                   alt={selectedSeason.name}
                   fluid
-                  rounded
-                  className="mb-3"
+                  className="rounded mb-3"
                   style={{ maxHeight: '300px', objectFit: 'cover' }}
                 />
               )}
             </div>
-            <div>
+            <div className="mb-4">
               <p>
                 <strong>Air Date:</strong> {formatDate(selectedSeason.air_date)}
               </p>
               <p>
-                <strong>Number of Episodes:</strong> {selectedSeason.episode_count}
+                <strong>Episodes:</strong> {selectedSeason.episode_count}
               </p>
-              <h5>Season Overview</h5>
-              <p>{selectedSeason.overview || 'No description available.'}</p>
+              <h5 className="mt-3">Overview</h5>
+              <p className="text-muted">{selectedSeason.overview || 'No description available.'}</p>
             </div>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="border-0">
             <Button variant="secondary" onClick={handleCloseModal}>
               Close
             </Button>
           </Modal.Footer>
         </Modal>
       )}
-    </Container>
+    </div>
   );
 };
 
